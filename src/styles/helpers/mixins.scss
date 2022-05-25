@@ -1,0 +1,49 @@
+/* SCSS Mixins */
+
+// Usage: @include mq($large) { ... }
+@mixin mq($value, $direction: 'min') {
+  @if type-of($value) == number and unitless($value) {
+    $value: $value + "px";
+  }
+
+  @if $direction == 'max' {
+    $value: $value - 1;
+  }
+
+  @if type-of($value) == string {
+    @each $breakpoint in $breakpoints {
+      @if index($breakpoint, $value) != null {
+        $value: nth($breakpoint, 1);
+      }
+    }
+  }
+
+  @media only screen and (#{$direction}-width: #{$value}) {
+    @content;
+  }
+}
+
+@mixin font-face($style-name, $file, $font-weight, $font-style, $category: '') {
+
+  @font-face {
+    font-family: '#{$style-name}';
+    src: url('{{ "' + $file + '.eot' + '" | asset_url }}');
+    src: url('{{ "' + $file + '.eot?#iefix' + '" | asset_url }}') format('embedded-opentype'),
+    url('{{ "' + $file + '.woff'  + '" | asset_url }}') format('woff'),
+    url('{{ "' + $file + '.woff2'  + '" | asset_url }}') format('woff2'),
+    url('{{ "' + $file + '.ttf'  + '" | asset_url }}') format('truetype');
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+
+  %#{$style-name} {
+    font: {
+      @if $category != '' {
+        family: '#{$style-name}', #{$category};
+      } @else {
+        family: '#{$style-name}';
+        weight: normal;
+      }
+    }
+  }
+}

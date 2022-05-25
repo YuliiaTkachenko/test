@@ -1,0 +1,38 @@
+{
+  "name": "shopify-webpack-theme-development",
+  "version": "1.0.0",
+  "description": "An empty starting point for modern Shopify theme development.",
+  "private": true,
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "NODE_ENV=development webpack --watch",
+    "build": "webpack",
+    "deploy": "webpack && theme deploy",
+    "add-all": "git add ."
+  },
+  "keywords": [],
+  "author": "@krjo",
+  "license": "MIT",
+  "devDependencies": {
+    "@shopify/theme-cart": "^3.1.0",
+    "@shopify/theme-product": "^3.1.0",
+    "@shopify/theme-product-form": "^3.1.0",
+    "autoprefixer": "^9.8.6",
+    "copy-webpack-plugin": "^5.1.2",
+    "css-loader": "^3.6.0",
+    "eslint-plugin-compat": "^4.0.0",
+    "glob": "^7.1.6",
+    "mini-css-extract-plugin": "^1.5.0",
+    "node-sass": "^5.0.0",
+    "postcss-loader": "^5.2.0",
+    "pre-commit": "^1.2.2",
+    "sass-loader": "^11.0.1",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0",
+    "webpack-shell-plugin-next": "^2.2.2"
+  },
+  "pre-commit": [
+    "build",
+    "add-all"
+  ]
+}

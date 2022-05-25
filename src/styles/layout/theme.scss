@@ -1,0 +1,38 @@
+@import 'Helpers/_helpers';
+
+@include font-face($main-font, 'GT-Super-Display-Light', 400, normal, 'serif');
+@include font-face($main-font, 'GT-Super-Display-Light-Italic', 400, italic, 'serif');
+@include font-face($main-font, 'GT-Super-Display-Medium', 500, normal, 'serif');
+@include font-face($main-font, 'GT-Super-Display-Medium-Italic', 500, italic, 'serif');
+
+@include font-face($second-font, 'GT-Super-Text-Book', 400, normal, 'serif');
+@include font-face($second-font, 'GT-Super-Text-Book-Italic', 400, italic, 'serif');
+
+@include font-face($platform-font, 'Platform-Regular', 400, normal, 'serif');
+@include font-face($platform-font, 'Platform-Medium', 500, normal, 'serif');
+
+
+.section-title {
+  font-family: $main-font;
+  font-size: 40px;
+  line-height: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 0 30px;
+
+  @include mq($medium, 'min') {
+    font-size: 80px;
+    line-height: 80px;
+    margin: 0 0 60px;
+  }
+}
+
+.section {
+  padding: 30px 0;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  @include mq($medium, 'min') {
+    padding: 40px;
+  }
+}

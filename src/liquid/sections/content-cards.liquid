@@ -1,0 +1,116 @@
+{{ 'section.content-cards-styles.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+
+<section class="content-cards section">
+  <h2 class="content-cards__title section-title"> {{ section.settings.title }} </h2>
+  <div class="content-cards__body">
+      <ul class="content-cards__list"
+          id="Slider-{{ section.id }}"
+          role="list"
+      >
+      {%- for block in section.blocks -%}
+        {%- assign empty_column = '' -%}
+        {%- if block.settings.image == blank and block.settings.title == blank and block.settings.text == blank and block.settings.link_label == blank -%}
+          {%- assign empty_column = ' content-cards__list__item--empty' -%}
+        {%- endif -%}
+
+        <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="content-cards__list__item {{ empty_column }}" {{ block.shopify_attributes }}>
+          <div class="content-cards__list-card content-container" style="background: {{ block.settings.block-bg }}">
+            {%- if block.settings.image != blank -%}
+              <div class="content-cards__list__img-wrap">
+                  <img
+                      class="content-cards__list__image"
+                      srcset="{{ block.settings.image | image_url: width: 312 }} 312w"
+                      src="{{ block.settings.image | image_url: width: 312 }}"
+                      sizes="(min-width: 724px) 312px, 244px"
+                      alt="{{ block.settings.title }}"
+                      height="224"
+                      width="312"
+                      loading="lazy"
+                  >
+                </div>
+            {%- endif -%}
+            <div class="content-cards__list__info">
+              {%- if block.settings.title != blank -%}
+                <h3 class="content-cards__list-card__title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="content-cards__list-card__text">{{ block.settings.text }}</div>
+              {%- endif -%}
+              {%- if block.settings.link_label != blank -%}
+                <a class="link content-cards__list-card__link" {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %}>{{ block.settings.link_label | escape }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </li>
+      {%- endfor -%}
+      </ul>
+  </div>
+</section>
+
+
+{% schema %}
+  { 
+    "name": "t:sections.content_cards.name",
+    "max_blocks": 4,
+    "settings": [ 
+      { 
+        "type": "text",
+        "id": "title",
+        "label": "t:sections.content_cards.settings.title.label"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "card",
+        "name": "t:sections.content_cards.blocks.card.name",
+        "settings": [
+          {
+            "type": "color",
+            "id": "block-bg",
+            "default": "#FFFFFF",
+            "label": "sections.content_cards.blocks.card.settings.color.label"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.content_cards.blocks.card.settings.image.label"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "default": "Card",
+            "label": "t:sections.content_cards.blocks.card.settings.title.label"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "default": "<p>Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.content_cards.blocks.card.settings.text.label"
+          },
+          {
+            "type": "text",
+            "id": "link_label",
+            "label": "t:sections.content_cards.blocks.card.settings.link_label.label"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "t:sections.content_cards.blocks.card.settings.link.label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.content_cards.presets.name",
+        "blocks": [
+          {
+            "type": "card"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

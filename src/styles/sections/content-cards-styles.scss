@@ -1,0 +1,100 @@
+@import '../helpers/_helpers';
+
+.content-cards {
+  font-family: $main-font;
+  text-align: center;
+
+  &__body {
+    width: 100%;
+    overflow: auto;
+    padding: 0 5px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none
+    }
+
+    @include mq($large, 'min') {
+      padding: 0;
+    }
+  }
+
+  &__list {
+    display: flex;
+    align-items: stretch;
+    column-gap: 0;
+    row-gap: 0;
+    list-style: none;
+    padding-left: 0;
+
+    &__img-wrap {
+      line-height: 0;
+    }
+
+    &__item {
+      padding: 5px;
+      width: 264px;
+      flex-shrink: 0;
+
+      @include mq($large, 'min') {
+        width: 25%;
+      }
+    }
+
+    &__image {
+      width: 100%;
+      height: auto;
+    }
+
+    &-card {
+      padding: 10px;
+      height: 100%;
+      min-height: 336px;
+
+      &__title {
+        font-size: 24px;
+        line-height: 24px;
+        font-family: $main-font;
+        margin-top: 20px;
+        margin-bottom: 8px;
+
+        @include mq($large, 'min') {
+          font-size: 32px;
+          line-height: 32px;
+          margin-top: 30px;
+          margin-bottom: 10px;
+        }
+      }
+
+      &__text {
+        font-family: $second-font;
+        line-height: 18px;
+        margin-bottom: 13px;
+
+        p {
+          margin: 0;
+        }
+
+        @include mq($large, 'min') {
+          margin-bottom: 10px;
+        }
+      }
+
+      &__link {
+        font-family: $platform-font;
+        font-size: 12px;
+        line-height: 12px;
+        text-transform: uppercase;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      @include mq($large, 'min') {
+        min-height: 436px;
+      }
+    }
+  }
+}
